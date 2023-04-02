@@ -1,0 +1,36 @@
+entity alu_control is
+  port (
+    opcode : in  std_logic_vector(5 downto 0);    -- Input opcode
+    funct  : in  std_logic_vector(5 downto 0);    -- Input funct field
+    alu_op : out std_logic_vector(2 downto 0)     -- Output ALU operation code
+  );
+end alu_control;
+
+architecture Behavioral of alu_control is
+begin
+  -- Default case: set output to 000 (ADD operation)
+  alu_op <= "000";
+
+  -- Check opcode field to determine ALU operation
+  case opcode is
+    when "000000" => -- R-type instruction
+      -- Check funct field to determine R-type ALU operation
+      case funct is
+        when "100000" => alu_op <= "010";  -- ADD
+        when "100010" => alu_op <= "110";  -- SUB
+        when "100100" => alu_op <= "000";  -- AND
+        when "100101" => alu_op <= "001";  -- OR
+        when "100110" => alu_op <= "111";  -- NOR
+        when "100111" => alu_op <= "101";  -- XOR
+        when others   => alu_op <= "000";  -- Default to ADD
+      end case;
+
+    when "001000" => alu_op <= "010";      -- ADDI
+    when "001100" => alu_op <= "000";      -- ANDI
+    when "001101" => alu_op <= "101";      -- ORI
+    when "001110" => alu_op <= "111";      -- NORI
+    when "001111" => alu_op <= "001";      -- XORI
+
+    when others   => alu_op <= "000";      -- Default to ADD
+  end case;
+end Behavioral;

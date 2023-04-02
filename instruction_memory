@@ -1,0 +1,18 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use ieee.numeric_std.ALL;
+
+entity instruction_memory is
+    Port ( address : in std_logic_vector(31 downto 0);
+           instruction : out std_logic_vector(31 downto 0));
+end instruction_memory;
+
+architecture Behavioral of instruction_memory is
+    type instruction_mem_type is array (0 to 255) of std_logic_vector(31 downto 0);
+    constant instruction_mem : instruction_mem_type := (
+        0 => X"1000_0000", -- instruction 1
+        1 => X"2000_0000"); -- instruction 2
+        -- add more instructions here
+begin
+    instruction <= instruction_mem(to_integer(unsigned(address(7 downto 0))));
+end Behavioral;

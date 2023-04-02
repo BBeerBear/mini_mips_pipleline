@@ -1,6 +1,514 @@
 m255
 K4
 z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/modeltech64_10.6d/examples
+T_opt
+!s110 1680461576
+VfMZFgj@IaHn^[fa`o9hMD1
+04 12 3 work registers_tb sim 1
+=1-3c2c309bf758-6429cf08-f0-42d0
+Z1 o-quiet -auto_acc_if_foreign -work work
+Z2 tCvgOpt 0
+n@_opt
+Z3 OL;O;10.6d;65
+T_opt1
+!s110 1680456423
+VPnITCh2b>SOWdA>ZD`De33
+04 9 3 work mini_mips rtl 1
+=1-3c2c309bf758-6429bae6-37e-6b0c
+R1
+R2
+n@_opt1
+R3
+R0
+T_opt2
+!s110 1680456953
+Ve:Z@Y<_CSf<VWo[UCA;]o1
+04 12 3 work mini_mips_tb sim 1
+=3-3c2c309bf758-6429bcf9-2dc-7460
+R1
+R2
+n@_opt2
+R3
+R0
+Eadder
+Z4 w1680379078
+Z5 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z6 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z7 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+Z8 dC:/Code/vhdl-learning/pipeline_mips_vhdl
+Z9 8C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd
+Z10 FC:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd
+l0
+L5
+V7616H4l^DHllSaU8eRnLm3
+!s100 X?f2Y9JedA:J3QXUoW8]j0
+Z11 OL;C;10.6d;65
+32
+Z12 !s110 1680461557
+!i10b 1
+Z13 !s108 1680461557.000000
+Z14 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd|
+Z15 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd|
+!i113 0
+Z16 o-work work -2002 -explicit
+Z17 tExplicit 1 CvgOpt 0
+Artl
+R5
+R6
+R7
+DEx4 work 5 adder 0 22 7616H4l^DHllSaU8eRnLm3
+l11
+L10
+VAo>kWJ=JTfn_<AVR]IaZ:3
+!s100 GMN8jl8430ifXZhEbL5OR3
+R11
+32
+R12
+!i10b 1
+R13
+R14
+R15
+!i113 0
+R16
+R17
+Eadder_tb
+Z18 w1680379121
+R5
+R6
+R7
+R8
+Z19 8C:\Code\vhdl-learning\pipeline_mips_vhdl\ADDER_TB.vhd
+Z20 FC:\Code\vhdl-learning\pipeline_mips_vhdl\ADDER_TB.vhd
+l0
+L5
+VBz8QMm]OH10AL:X7S_`1;1
+!s100 lA9E:MlnWE@?PJ:Y^:mY81
+R11
+32
+R12
+!i10b 1
+R13
+Z21 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:\Code\vhdl-learning\pipeline_mips_vhdl\ADDER_TB.vhd|
+Z22 !s107 C:\Code\vhdl-learning\pipeline_mips_vhdl\ADDER_TB.vhd|
+!i113 0
+R16
+R17
+Atest
+R5
+R6
+R7
+DEx4 work 8 adder_tb 0 22 Bz8QMm]OH10AL:X7S_`1;1
+l15
+L8
+V1K`W7gz^CAokU4V_P_VOc1
+!s100 0DKH?>^h_BhQ9QkDNgEVj1
+R11
+32
+R12
+!i10b 1
+R13
+R21
+R22
+!i113 0
+R16
+R17
+Einstruction_memory
+Z23 w1680459720
+R5
+R6
+R7
+R8
+Z24 8C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd
+Z25 FC:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd
+l0
+L5
+V2mDKlE82efOAP[R1bT2`C2
+!s100 OQ]KMIGW^h<YlVzhUbWH=2
+R11
+32
+R12
+!i10b 1
+R13
+Z26 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd|
+Z27 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd|
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+DEx4 work 18 instruction_memory 0 22 2mDKlE82efOAP[R1bT2`C2
+l20
+L11
+VRfN>2Di9;JV[eQ]88GA?@3
+!s100 iQ@GQDIcH4?Gd3QWBW==b2
+R11
+32
+R12
+!i10b 1
+R13
+R26
+R27
+!i113 0
+R16
+R17
+Einstruction_memory_tb
+Z28 w1680400162
+R5
+R6
+R7
+R8
+Z29 8C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd
+Z30 FC:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd
+l0
+L5
+VT1n;dUCNAG]9KWGUWbMce2
+!s100 S>RYESVbLi<1V87BfkZBK2
+R11
+32
+R12
+!i10b 1
+R13
+Z31 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd|
+Z32 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd|
+!i113 0
+R16
+R17
+Atest
+R5
+R6
+R7
+DEx4 work 21 instruction_memory_tb 0 22 T1n;dUCNAG]9KWGUWbMce2
+l17
+L8
+V5ecC2Aah[Tf4:;nVz6FJ71
+!s100 RejD3zCQGGG>XNgj^^NEi1
+R11
+32
+R12
+!i10b 1
+R13
+R31
+R32
+!i113 0
+R16
+R17
+Emini_mips
+Z33 w1680457041
+R5
+R6
+R7
+R8
+Z34 8C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd
+Z35 FC:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd
+l0
+L5
+VKMY=]_8ld<<2_L6Va>I`B2
+!s100 f>95b8gzVaUOh9B5egg^R3
+R11
+32
+R12
+!i10b 1
+R13
+Z36 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd|
+Z37 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd|
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+DEx4 work 9 mini_mips 0 22 KMY=]_8ld<<2_L6Va>I`B2
+l34
+L10
+VX0D44]mJOR8CgR6l4Y4I<0
+!s100 :<;?6[=n^mRMcN2O<C`Uc0
+R11
+32
+R12
+!i10b 1
+R13
+R36
+R37
+!i113 0
+R16
+R17
+Emini_mips_tb
+Z38 w1680456943
+R5
+R6
+R7
+R8
+Z39 8C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_TB.vhd
+Z40 FC:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_TB.vhd
+l0
+L5
+V=n_O9Jc]lPWJ]YP>fofRX2
+!s100 lRiXBzm4[lR_5<ZWCXP4D1
+R11
+32
+R12
+!i10b 1
+R13
+Z41 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_TB.vhd|
+Z42 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_TB.vhd|
+!i113 0
+R16
+R17
+Asim
+R5
+R6
+R7
+DEx4 work 12 mini_mips_tb 0 22 =n_O9Jc]lPWJ]YP>fofRX2
+l15
+L8
+V5:?iEYaO_43NQZomE<0hK2
+!s100 8E^lE7P@D?R_FY=2SQJlV1
+R11
+32
+Z43 !s110 1680461558
+!i10b 1
+R13
+R41
+R42
+!i113 0
+R16
+R17
+Emux
+Z44 w1680447350
+R5
+R6
+R7
+R8
+Z45 8C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd
+Z46 FC:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd
+l0
+L4
+Vi@?7llI1:GWJ5h=QFAoTZ3
+!s100 Jd0eRhGF15dheR^OShIQC0
+R11
+32
+R12
+!i10b 1
+R13
+Z47 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd|
+Z48 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd|
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+DEx4 work 3 mux 0 22 i@?7llI1:GWJ5h=QFAoTZ3
+l12
+L11
+V3dzUZ5Ugl9]]z4PCIHib;2
+!s100 ^aJUYGEJUYz7WTk7Bla;=1
+R11
+32
+R12
+!i10b 1
+R13
+R47
+R48
+!i113 0
+R16
+R17
+Emux_tb
+Z49 w1680447526
+R5
+R6
+R7
+R8
+Z50 8C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd
+Z51 FC:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd
+l0
+L5
+Va1PjUP3M^443en6m39C_Q3
+!s100 BP2^ik8QS5mdQZoF?J;WZ0
+R11
+32
+R12
+!i10b 1
+R13
+Z52 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd|
+Z53 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd|
+!i113 0
+R16
+R17
+Asim
+R5
+R6
+R7
+DEx4 work 6 mux_tb 0 22 a1PjUP3M^443en6m39C_Q3
+l19
+L8
+VE86fMH@CVA5K6`_UCza_;0
+!s100 i_E=kEn[16D]M3ChRQOPP3
+R11
+32
+R12
+!i10b 1
+R13
+R52
+R53
+!i113 0
+R16
+R17
+Epc
+Z54 w1680379343
+R5
+R6
+R7
+R8
+Z55 8C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd
+Z56 FC:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd
+l0
+L5
+V^F<;^C2gXS1mabOGf:J^n3
+!s100 QMUzZYYQJVWZ_LX6^Cj;B3
+R11
+32
+R12
+!i10b 1
+R13
+Z57 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd|
+Z58 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd|
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+DEx4 work 2 pc 0 22 ^F<;^C2gXS1mabOGf:J^n3
+l13
+L11
+VSN?JheLJf4cj`dUiMfQF:2
+!s100 >C9lc`A5VkYdH:IEQ`H[N3
+R11
+32
+R12
+!i10b 1
+R13
+R57
+R58
+!i113 0
+R16
+R17
+Epc_tb
+Z59 w1680379079
+R5
+R6
+R7
+R8
+Z60 8C:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd
+Z61 FC:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd
+l0
+L5
+VF1LLYm12znCk[4Q1X2EJ60
+!s100 5`=MTMXhRd`B4RU4ZJ0h?1
+R11
+32
+R12
+!i10b 1
+R13
+Z62 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd|
+Z63 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd|
+!i113 0
+R16
+R17
+Atest
+R5
+R6
+R7
+DEx4 work 5 pc_tb 0 22 F1LLYm12znCk[4Q1X2EJ60
+l22
+L8
+V@ek]DhKKAdYGPcJSP^7C80
+!s100 UGY`g3fkH;RkUD?29GiK90
+R11
+32
+R12
+!i10b 1
+R13
+R62
+R63
+!i113 0
+R16
+R17
+Eregisters
+Z64 w1680461553
+R5
+R6
+R7
+R8
+Z65 8C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd
+Z66 FC:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd
+l0
+L5
+V8d1Ad^N?nOzzdl3ckjiO31
+!s100 jMV_6T7@]RAbCj[6AOAZZ1
+R11
+32
+R43
+!i10b 1
+Z67 !s108 1680461558.000000
+Z68 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd|
+Z69 !s107 C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd|
+!i113 0
+R16
+R17
+Artl
+R5
+R6
+R7
+DEx4 work 9 registers 0 22 8d1Ad^N?nOzzdl3ckjiO31
+l22
+L15
+V[oZSdRI9h;ck><V::YBNk0
+!s100 ESe:QFg@iBRTcYi?>gZGK3
+R11
+32
+R43
+!i10b 1
+R67
+R68
+R69
+!i113 0
+R16
+R17
+Eregisters_tb
+Z70 w1680461416
+R5
+R6
+R7
+R8
+Z71 8C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS_TB.vhd
+Z72 FC:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS_TB.vhd
+l0
+L5
+VgLnNI>^;nZ^8b3jbak4_j2
+!s100 kFVRUDz^;<K9X9Vf;k[eI0
+R11
+32
+R43
+!i10b 1
+R67
+Z73 !s90 -reportprogress|300|-work|work|-2002|-explicit|-vopt|-stats=none|C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS_TB.vhd|
+Z74 !s107 C:/Code/vhdl-learning/pipelm255
+K4
+z2
 !s8c locked
 !s95 MTI
 cModel Technology Builtin Library

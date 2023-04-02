@@ -1,0 +1,82 @@
+C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX
+-- Compiling architecture RTL of MUX
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity INSTRUCTION_MEMORY
+-- Compiling architecture RTL of INSTRUCTION_MEMORY
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX_TB.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX_tb
+-- Compiling architecture sim of MUX_tb
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/INSTRUCTION_MEMORY_TB.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity INSTRUCTION_MEMORY_TB
+-- Compiling architecture TEST of INSTRUCTION_MEMORY_TB
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PC
+-- Compiling architecture RTL of PC
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ADDER
+-- Compiling architecture RTL of ADDER
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/PC_TB.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PC_tb
+-- Compiling architecture TEST of PC_TB
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MINI_MIPS
+-- Compiling architecture RTL of MINI_MIPS
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/ADDER_TB.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none {C:\Code\vhdl-learning\pipeline_mips_vhdl\ADDER_TB.vhd}
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity ADDER_TB
+-- Compiling architecture TEST of ADDER_TB
+
+} {} {}}

@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 
 entity PC_tb is
 end PC_tb;
@@ -7,14 +8,14 @@ end PC_tb;
 architecture TEST of PC_TB is
 
     signal clk 			 : std_logic := '0';
-    signal addr_next : std_logic_vector(31 downto 0) := (others => '0');
-    signal addr_now  : std_logic_vector(31 downto 0);
+    signal addr_next : unsigned(31 downto 0) := (others => '0');
+    signal addr_now  : unsigned(31 downto 0);
 
     component PC is
         port (
             clk : in std_logic;
-            addr_next : in std_logic_vector(31 downto 0);
-            addr_now : out std_logic_vector(31 downto 0)
+            addr_next : in unsigned(31 downto 0);
+            addr_now : out unsigned(31 downto 0)
         );
     end component;
 

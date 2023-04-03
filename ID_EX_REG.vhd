@@ -19,19 +19,19 @@ entity ID_EX_REG is
 			 rt_addr_in				: in std_logic_vector(4 downto 0);
 			 rd_addr_in				: in std_logic_vector(4 downto 0);
 			 
-			 reg_dst_out 			: in std_logic; -- EX
+			 reg_dst_out 			: out std_logic; -- EX
 			 alu_op_out				: out std_logic_vector(2 downto 0); -- EX
 			 alu_src_out			: out std_logic; -- EX
 			 branch_out				: out std_logic; -- MEM
 			 mem_read_out			: out std_logic; -- MEM
 			 mem_write_out		: out std_logic; -- MEM
 			 reg_write_out		: out std_logic; -- WB
-			 mem_to_reg_out		: out std_logic); -- WB
-			 pc_in						: out unsigned(31 downto 0);
-			 read_data1_in		: out unsigned(31 downto 0);
-			 read_data2_in		: out unsigned(31 downto 0);
+			 mem_to_reg_out		: out std_logic; -- WB
+			 pc_out						: out unsigned(31 downto 0);
+			 read_data1_out		: out unsigned(31 downto 0);
+			 read_data2_out		: out unsigned(31 downto 0);
 			 sign_extend_out	: out std_logic_vector(31 downto 0));
-			 rt_addr_in				: in std_logic_vector(4 downto 0);
-			 rd_addr_in				: out std_logic_vector(4 downto 0);
+			 rt_addr_out			: out std_logic_vector(4 downto 0);
+			 rd_addr_out			: out std_logic_vector(4 downto 0);
 			 
 end ID_EX_REG;

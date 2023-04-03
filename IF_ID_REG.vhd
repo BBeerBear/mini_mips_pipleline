@@ -1,3 +1,6 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
 entity IF_ID_REG is
 	port(clk						: in std_logic;
 			 instruction_in : in std_logic_vector(31 downto 0);

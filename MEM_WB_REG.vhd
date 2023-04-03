@@ -1,3 +1,6 @@
+library ieee;
+use ieee.std_logic_1164.all;
+
 entity EX_MEM_REG is
 	port(clk 							: in std_logic;
 			 reg_write_in			: in std_logic; -- WB

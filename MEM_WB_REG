@@ -1,0 +1,39 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity MEM_WB_REG is
+    port (clk : in std_logic;
+          mem_read_data_in : in unsigned(31 downto 0); -- MEM
+          alu_result_in : in unsigned(31 downto 0); -- EX
+          rd_addr_in : in std_logic_vector(4 downto 0); -- EX
+          reg_write_in : in std_logic; -- WB
+          mem_to_reg_in : in std_logic; -- WB
+          
+          mem_read_data_out : out unsigned(31 downto 0); -- MEM
+          alu_result_out : out unsigned(31 downto 0); -- EX
+          rd_addr_out : out std_logic_vector(4 downto 0); -- EX
+          reg_write_out : out std_logic; -- WB
+          mem_to_reg_out : out std_logic -- WB
+          );
+end entity;
+
+architecture behavioral of MEM_WB_REG is
+    signal mem_read_data, alu_result : unsigned(31 downto 0);
+    signal rd_addr : std_logic_vector(4 downto 0);
+begin
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            mem_read_data <= mem_read_data_in;
+            alu_result <= alu_result_in;
+            rd_addr <= rd_addr_in;
+            
+            mem_read_data_out <= mem_read_data;
+            alu_result_out <= alu_result;
+            rd_addr_out <= rd_addr;
+            reg_write_out <= reg_write_in;
+            mem_to_reg_out <= mem_to_reg_in;
+        end if;
+    end process;
+end behavioral;

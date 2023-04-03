@@ -1,0 +1,35 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+entity data_memory is
+    generic (
+        ADDR_WIDTH : integer := 5; -- Address width of the memory
+        DATA_WIDTH : integer := 32 -- Data width of the memory
+    );
+    port (
+        clk : in std_logic;
+        we : in std_logic; -- Write enable signal
+        addr : in unsigned(ADDR_WIDTH-1 downto 0); -- Address bus
+        data_in : in unsigned(DATA_WIDTH-1 downto 0); -- Data input
+        data_out : out unsigned(DATA_WIDTH-1 downto 0) -- Data output
+    );
+end entity data_memory;
+
+architecture behavioral of data_memory is
+    type memory is array (0 to 2**ADDR_WIDTH - 1) of unsigned(DATA_WIDTH-1 downto 0);
+    signal mem : memory := (others => (others => '0')); -- Initialization of the memory
+    
+begin
+    process (clk)
+    begin
+        if rising_edge(clk) then
+            if we = '1' then
+                mem(to_integer(addr)) <= data_in;
+            end if;
+            data_out <= mem(to_integer(addr));
+        end if;
+    end process;
+end architecture behavioral;
+
+

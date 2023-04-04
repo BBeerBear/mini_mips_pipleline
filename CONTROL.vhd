@@ -63,7 +63,7 @@ begin
 				mem_to_reg <= '0';
 			when "000100" => -- BEQ
 				reg_dst <= 'X';
-				alu_op <= "100";
+				alu_op <= "110";
 				alu_src <= '1';
 				branch <= '1';
 				mem_read <= '0';
@@ -72,7 +72,7 @@ begin
 				mem_to_reg <= '0';
 			when "100011" => -- LW
 				reg_dst <= '0';
-				alu_op <= "000";
+				alu_op <= "100"; -- +
 				alu_src <= '1';
 				branch <= '0';
 				mem_read <= '1';
@@ -81,7 +81,7 @@ begin
 				mem_to_reg <= '1';
 			when "101000" => -- SB
 				reg_dst <= 'X';
-				alu_op <= "000";
+				alu_op <= "100"; -- +
 				alu_src <= '1';
 				branch <= '0';
 				mem_read <= '0';

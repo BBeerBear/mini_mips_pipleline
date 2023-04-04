@@ -4,6 +4,7 @@ use ieee.numeric_std.all;
 
 entity REGISTERS is
 	port(clk				: in std_logic;
+			 reg_write  : in std_logic;
 			 read_reg1	: in std_logic_vector(4 downto 0);
 			 read_reg2	: in std_logic_vector(4 downto 0);
 			 write_reg  : in std_logic_vector(4 downto 0);
@@ -28,7 +29,7 @@ begin
 		read_data2 <= reg_file(to_integer(unsigned(read_reg2)));
 		
 		 -- Write data to register if write enable is high
-		if write_reg /= "00000" then
+		if write_reg /= "00000" and reg_write = '1' then
 				reg_file(to_integer(unsigned(write_reg))) <= write_data;
 		end if;
 	end if;

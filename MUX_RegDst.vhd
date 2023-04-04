@@ -1,14 +1,14 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-entity MUX is
+entity MUX_RegDst is
 	port(	sel    	: in  std_logic;
-				in_0    : in  unsigned(31 downto 0);
-				in_1		: in  unsigned(31 downto 0);
-				mux_out	: out unsigned(31 downto 0));
-end MUX;
+				in_0    : in  std_logic_vector(4 downto 0);
+				in_1		: in  std_logic_vector(4 downto 0);
+				mux_out	: out std_logic_vector(4 downto 0));
+end MUX_RegDst;
 
-architecture RTL of MUX is
+architecture RTL of MUX_RegDst is
 begin
 process (sel, in_0, in_1) is
 begin

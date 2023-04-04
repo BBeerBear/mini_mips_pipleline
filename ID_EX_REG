@@ -3,78 +3,59 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity ID_EX_REG is
-    port(
-        clk             : in std_logic;
-        reset           : in std_logic;
-        instruction_in  : in std_logic_vector(31 downto 0);
-        pc_in           : in unsigned(31 downto 0);
-        rs_in           : in unsigned(4 downto 0);
-        rt_in           : in unsigned(4 downto 0);
-        rd_in           : in unsigned(4 downto 0);
-        shamt_in        : in unsigned(4 downto 0);
-        immediate_in    : in unsigned(15 downto 0);
-        address_in      : in unsigned(25 downto 0);
-        reg_write_in    : in std_logic;
-        mem_read_in     : in std_logic;
-        mem_write_in    : in std_logic;
-        mem_to_reg_in   : in std_logic;
-        alu_op_in       : in unsigned(2 downto 0);
-        branch_in       : in std_logic;
-        jump_in         : in std_logic;
-        instruction_out : out std_logic_vector(31 downto 0);
-        pc_out          : out unsigned(31 downto 0);
-        rs_out          : out unsigned(4 downto 0);
-        rt_out          : out unsigned(4 downto 0);
-        rd_out          : out unsigned(4 downto 0);
-        shamt_out       : out unsigned(4 downto 0);
-        immediate_out   : out unsigned(15 downto 0);
-        address_out     : out unsigned(25 downto 0);
-        reg_write_out   : out std_logic;
-        mem_read_out    : out std_logic;
-        mem_write_out   : out std_logic;
-        mem_to_reg_out  : out std_logic;
-        alu_op_out      : out unsigned(2 downto 0);
-        branch_out      : out std_logic;
-        jump_out        : out std_logic
-    );
-end entity;
+	port(clk 							: in std_logic;
+	
+			 reg_dst_in 			: in std_logic; -- EX
+			 alu_op_in				: in std_logic_vector(2 downto 0); -- EX
+			 alu_src_in				: in std_logic; -- EX
+			 branch_in				: in std_logic; -- MEM
+			 mem_read_in			: in std_logic; -- MEM
+			 mem_write_in			: in std_logic; -- MEM
+			 reg_write_in			: in std_logic; -- WB
+			 mem_to_reg_in		: in std_logic; -- WB
+			 pc_in						: in unsigned(31 downto 0);
+			 read_data1_in		: in unsigned(31 downto 0);
+			 read_data2_in		: in unsigned(31 downto 0);
+			 sign_extend_in	  : in std_logic_vector(31 downto 0);
+			 rt_addr_in				: in std_logic_vector(4 downto 0);
+			 rd_addr_in				: in std_logic_vector(4 downto 0);
+			 
+			 reg_dst_out 			: out std_logic; -- EX
+			 alu_op_out				: out std_logic_vector(2 downto 0); -- EX
+			 alu_src_out			: out std_logic; -- EX
+			 branch_out				: out std_logic; -- MEM
+			 mem_read_out			: out std_logic; -- MEM
+			 mem_write_out		: out std_logic; -- MEM
+			 reg_write_out		: out std_logic; -- WB
+			 mem_to_reg_out		: out std_logic; -- WB
+			 pc_out						: out unsigned(31 downto 0);
+			 read_data1_out		: out unsigned(31 downto 0);
+			 read_data2_out		: out unsigned(31 downto 0);
+			 sign_extend_out	: out std_logic_vector(31 downto 0);
+         		 rt_addr_out			: out std_logic_vector(4 downto 0);
+         		 rd_addr_out			: out std_logic_vector(4 downto 0));
+			 
+end ID_EX_REG;
 
-architecture behavioral of ID_EX_REG is
+architecture Behavioral of ID_EX_REG is
 begin
-    process(clk, reset)
-    begin
-        if reset = '1' then
-            instruction_out <= (others => '0');
-            pc_out <= (others => '0');
-            rs_out <= (others => '0');
-            rt_out <= (others => '0');
-            rd_out <= (others => '0');
-            shamt_out <= (others => '0');
-            immediate_out <= (others => '0');
-            address_out <= (others => '0');
-            reg_write_out <= '0';
-            mem_read_out <= '0';
-            mem_write_out <= '0';
-            mem_to_reg_out <= '0';
-            alu_op_out <= (others => '0');
-            branch_out <= '0';
-            jump_out <= '0';
-        elsif rising_edge(clk) then
-            instruction_out <= instruction_in;
-            pc_out <= pc_in;
-            rs_out <= rs_in;
-            rt_out <= rt_in;
-            rd_out <= rd_in;
-            shamt_out <= shamt_in;
-            immediate_out <= immediate_in;
-            address_out <= address_in;
-            reg_write_out <= reg_write_in;
-            mem_read_out <= mem_read_in;
-            mem_write_out <= mem_write_in;
-            mem_to_reg_out <= mem_to_reg_in;
-            alu_op_out <= alu_op_in;
-            branch_out <= branch_in;
-            jump_out <= jump_in;
-        end if;
-    end process;
-end architecture;
+	process (clk)
+	begin
+	if rising_edge(clk) then
+		reg_dst_out <= reg_dst_in;
+		alu_op_out <= alu_op_in;
+		alu_src_out <= alu_src_in;
+		branch_out <= branch_in;
+		mem_read_out <= mem_read_in;
+		mem_write_out <= mem_write_in;
+		reg_write_out <= reg_write_in;
+		mem_to_reg_out <= mem_to_reg_in;
+		pc_out <= pc_in;
+		read_data1_out <= read_data1_in;
+		read_data2_out <= read_data2_in;
+		sign_extend_out <= sign_extend_in;
+		rt_addr_out <= rt_addr_in;
+		rd_addr_out <= rd_addr_in;
+	end if;
+	end process;
+end Behavioral;

@@ -3,46 +3,56 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity EX_MEM_REG is
-    port (
-        clk : in std_logic;
-        alu_result_in : in unsigned(31 downto 0); -- EX
-        branch_target_in : in unsigned(31 downto 0); -- EX
-        zero_out_in : in std_logic; -- EX
-        mem_read_data_in : in unsigned(31 downto 0); -- MEM
-        reg_write_in : in std_logic; -- WB
-        mem_to_reg_in : in std_logic; -- WB
-        rd_addr_in : in std_logic_vector(4 downto 0);
-        
-        alu_result_out : out unsigned(31 downto 0); -- EX
-        branch_target_out : out unsigned(31 downto 0); -- EX
-        zero_out_out : out std_logic; -- EX
-        mem_read_data_out : out unsigned(31 downto 0); -- MEM
-        reg_write_out : out std_logic; -- WB
-        mem_to_reg_out : out std_logic; -- WB
-        rd_addr_out : out std_logic_vector(4 downto 0)
+    port(
+        clk                 : in std_logic;
+        branch_in           : in std_logic; -- MEM
+        mem_read_in         : in std_logic; -- MEM
+        mem_write_in        : in std_logic; -- MEM
+        reg_write_in        : in std_logic; -- WB
+        mem_to_reg_in       : in std_logic; -- WB
+        pc_in               : in unsigned(31 downto 0);
+        cond_in             : in boolean;
+        alu_output_in       : in unsigned(31 downto 0);
+        write_data_in       : in unsigned(31 downto 0);
+        write_reg_in        : in std_logic_vector(4 downto 0);
+        branch_out          : out std_logic; -- MEM
+        mem_read_out        : out std_logic; -- MEM
+        mem_write_out       : out std_logic; -- MEM
+        reg_write_out       : out std_logic; -- WB
+        mem_to_reg_out      : out std_logic; -- WB
+        pc_out              : out unsigned(31 downto 0);
+        cond_out            : out boolean;
+        alu_output_out      : out unsigned(31 downto 0);
+        write_data_out      : out unsigned(31 downto 0);
+        write_reg_out       : out std_logic_vector(4 downto 0)
     );
-end entity;
+end EX_MEM_REG;
 
-architecture behavioral of EX_MEM_REG is
-    signal alu_result, branch_target, mem_read_data : unsigned(31 downto 0);
-    signal zero_out : std_logic;
+architecture Behavioral of EX_MEM_REG is
 begin
     process (clk)
     begin
-        if rising_edge(clk) then
-            alu_result <= alu_result_in;
-            branch_target <= branch_target_in;
-            zero_out <= zero_out_in;
-            mem_read_data <= mem_read_data_in;
-            rd_addr_out <= rd_addr_in;
-            
-            alu_result_out <= alu_result;
-            branch_target_out <= branch_target;
-            zero_out_out <= zero_out;
-            mem_read_data_out <= mem_read_data;
-            reg_write_out <= reg_write_in;
-            mem_to_reg_out <= mem_to_reg_in;
+        if (rising_edge(clk)) then
+            if (reg_write_in = '1') then
+                write_data_out <= write_data_in;
+                write_reg_out <= write_reg_in;
+                mem_to_reg_out <= mem_to_reg_in;
+                reg_write_out <= reg_write_in;
+            end if;
+            alu_output_out <= alu_output_in;
+            mem_write_out <= mem_write_in;
+            mem_read_out <= mem_read_in;
+            cond_out <= cond_in;
+            pc_out <= pc_in;
+            if (branch_in = '1') then
+                if (cond_in = true) then
+                    branch_out <= '1';
+                else
+                    branch_out <= '0';
+                end if;
+            else
+                branch_out <= '0';
+            end if;
         end if;
     end process;
-end behavioral;
-
+end Behavioral;

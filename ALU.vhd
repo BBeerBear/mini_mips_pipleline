@@ -6,7 +6,7 @@ entity ALU is
 	port(alu_in_1 	: in unsigned(31 downto 0);
 			 alu_in_2 	: in unsigned(31 downto 0);
 			 alu_op			: in std_logic_vector(2 downto 0);
-			 alu_cond   : out boolean := false;
+			 alu_cond   : out std_logic;
 			 alu_output	: out unsigned(31 downto 0));
 end ALU;
 
@@ -24,7 +24,11 @@ begin
 		when "101" => -- SUBUI
 			alu_output <= alu_in_1 - alu_in_2;
 		when "110" => -- BEQ
-			alu_cond <= alu_in_1 = alu_in_2;
+			if alu_in_1 = alu_in_2 then
+				alu_cond <= '0';
+			else
+				alu_cond <= '1';
+			end if;
 			alu_output <= x"00000000";
 		when others => 
 			alu_output <= x"00000000";

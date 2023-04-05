@@ -44,7 +44,7 @@ signal ex_adder_out						: unsigned(31 downto 0);
 signal ex_alu_in1							: unsigned(31 downto 0);
 signal ex_alusrcmux_in0				: unsigned(31 downto 0);
 signal ex_alu_in2 						: unsigned(31 downto 0);
-signal ex_alu_cond						: std_logic;
+signal ex_alu_cond						: boolean;
 signal ex_alu_result    			: unsigned(31 downto 0);
 signal ex_read_data2					: unsigned(31 downto 0);
 signal ex_shift_left_2_in			: unsigned(31 downto 0);
@@ -60,30 +60,18 @@ signal mem_control_memwrite		: std_logic; -- MEM
 signal mem_control_regwrite		: std_logic; -- WB
 signal mem_control_memtoreg		: std_logic; -- WB
 signal mem_pc									: unsigned(31 downto 0);
-signal mem_cond								: std_logic;
+signal mem_cond								: boolean;
 signal mem_alu_result    			: unsigned(31 downto 0);
 signal mem_write_data					: unsigned(31 downto 0);
 signal mem_write_reg		  		: std_logic_vector(4 downto 0);
-signal mem_read_data					: unsigned(31 downto 0);
-signal mem_pcsrc							: std_logic;
 
 -- WB signal
 signal wb_control_regwrite 		: std_logic; -- control signal RegWrite
-signal wb_control_memtoreg    : std_logic;
 signal wb_write_reg 					: std_logic_vector(4 downto 0); -- rd
-signal wb_read_data 					: unsigned(31 downto 0); -- read data from mem
-signal wb_alu_output					: unsigned(31 downto 0);
-signal wb_write_data					: unsigned(31 downto 0);
-
+signal wb_write_data 					: unsigned(31 downto 0); -- write data
+-- signal id_read_reg1, id_read_reg2, id_write_reg, id_write_data: unsigned(31 downto 0);
 begin
 	-- IF
-	MUX_PCSrc_inst: entity work.MUX port map (
-		sel => mem_pcsrc,
-		in_0 => if_adder_out,
-		in_1 => mem_pc,
-		mux_out => if_pc_in
-	);
-	
 	PC_inst: entity work.PC port map (
 		clk => clk,
 		addr_next => if_pc_in,
@@ -217,7 +205,7 @@ begin
 		 mem_write_in	=> ex_control_memwrite, -- MEM
 		 reg_write_in => ex_control_regwrite, -- WB
 		 mem_to_reg_in => ex_control_memtoreg, -- WB
-		 pc_in => ex_adder_out,
+		 pc_in => ⁯ex_adder_out,
 		 cond_in => ex_alu_cond,
 		 alu_output_in => ex_alu_result,
 		 write_data_in => ex_read_data2, 
@@ -236,46 +224,6 @@ begin
 	);
 	
   -- MEM
-	
-	AND_PCSrc_inst : entity work.AND_PCSrc port map (
-		branch => mem_control_branch,
-		cond => mem_cond,
-		pcsrc	=> mem_pcsrc
-	);
-	
-	DATA_MEMORY_inst : entity work.DATA_MEMORY port map (
-		clk => clk,
-		mem_write => mem_control_memwrite,
-		mem_read => mem_control_memread,
-		address => mem_alu_result,
-		write_data => mem_write_data,
-		read_data => mem_read_data
-	);
-	
-	-- MEM/WB
-	MEM_WB_REG_inst : entity work.MEM_WB_REG port map (
-		 clk => clk,
-		 reg_write_in => mem_control_regwrite, -- WB
-		 mem_to_reg_in => mem_control_memtoreg, -- WB
-		 read_data_in	=> mem_read_data,
-		 alu_output_in => mem_alu_result,
-		 write_reg_in	=> mem_write_reg,
-			
-		 reg_write_out => wb_control_regwrite, -- WB
-		 mem_to_reg_out	=> wb_control_memtoreg, -- WB
-		 read_data_out => wb_read_data,
-		 alu_output_out => wb_alu_output,
-		 write_reg_out => wb_write_reg
-	);
-	
-	-- WB
-	MUX_MemtoReg_inst : entity work.MUX port map (
-		sel => wb_control_memtoreg,
-		in_0 => wb_read_data,
-		in_1 => wb_alu_output,
-		mux_out => wb_write_data
-	);
-	
 	
 end RTL;
 

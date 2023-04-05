@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity REGISTERS is
 	port(clk				: in std_logic;
-			 reg_write  : in std_logic;
+			 reg_write  : in std_logic; -- control signal
 			 read_reg1	: in std_logic_vector(4 downto 0);
 			 read_reg2	: in std_logic_vector(4 downto 0);
 			 write_reg  : in std_logic_vector(4 downto 0);
@@ -16,8 +16,8 @@ end REGISTERS;
 architecture RTL of REGISTERS is
 	type reg_array is array (0 to 31) of unsigned(31 downto 0);
 	signal reg_file : reg_array := (
-		0 => x"55555555",
-		1 => x"AAAAAAAA",
+		1 => x"55555555",
+		2 => x"AAAAAAAA",
 		others => (others => '0')
 	);
 begin

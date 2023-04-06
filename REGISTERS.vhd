@@ -20,6 +20,7 @@ architecture RTL of REGISTERS is
 		2 => x"CCCCCCCC",
 		3 => x"66666666",
 		4 => x"00000001",
+		13 => x"00000048",
 		others => (others => '0')
 	);
 begin

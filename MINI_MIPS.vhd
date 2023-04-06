@@ -16,10 +16,14 @@ signal pc_out 								: unsigned(31 downto 0);
 signal if_adder_out 					: unsigned(31 downto 0);
 signal if_instruction					: std_logic_vector(31 downto 0);
 signal if_pcsrc							  : std_logic;
+signal if_mux_pcsrc_out				: unsigned(31 downto 0);
+signal if_mux_jumpsrc_out			: unsigned(31 downto 0);
 
 -- ID signal
 signal id_instruction 				: std_logic_vector(31 downto 0);
 signal id_pc 									: unsigned(31 downto 0); --pc
+signal id_control_jump				: std_logic; -- ID
+signal id_control_jumpsrc			: std_logic; -- ID
 signal id_control_regdst 			: std_logic; -- EX
 signal id_control_aluop				: std_logic_vector(2 downto 0); -- EX
 signal id_control_alusrc			: std_logic; -- EX
@@ -31,6 +35,9 @@ signal id_control_memtoreg		: std_logic; -- WB
 signal id_read_data1					: unsigned(31 downto 0); -- read data1
 signal id_read_data2					: unsigned(31 downto 0); -- read data2
 signal id_sign_extend_out	  	: unsigned(31 downto 0); -- sign extend output
+signal id_jump_pc 						: unsigned(31 downto 0);
+signal id_jump_reg_pc					: unsigned(31 downto 0);
+signal id_jump_imm						: unsigned(31 downto 0);
 
 -- EX signal
 signal ex_control_regdst 			: std_logic; -- EX
@@ -44,7 +51,7 @@ signal ex_control_memtoreg		: std_logic; -- WB
 signal ex_pc									: unsigned(31 downto 0);
 signal ex_adder_out						: unsigned(31 downto 0);
 signal ex_alu_in1							: unsigned(31 downto 0);
-signal ex_read_data2				: unsigned(31 downto 0);
+signal ex_read_data2				  : unsigned(31 downto 0);
 signal ex_alu_in2 						: unsigned(31 downto 0);
 signal ex_alu_cond						: std_logic;
 signal ex_alu_result    			: unsigned(31 downto 0);
@@ -60,7 +67,7 @@ signal mem_control_memread		: std_logic; -- MEM
 signal mem_control_memwrite		: std_logic; -- MEM
 signal mem_control_regwrite		: std_logic; -- WB
 signal mem_control_memtoreg		: std_logic; -- WB
-signal mem_pc									: unsigned(31 downto 0);
+signal mem_branch_pc					: unsigned(31 downto 0);
 signal mem_cond								: std_logic;
 signal mem_alu_result    			: unsigned(31 downto 0);
 signal mem_write_data					: unsigned(31 downto 0);
@@ -97,7 +104,36 @@ begin
 	MUX_PCSrc_inst: entity work.MUX port map (
 		sel => if_pcsrc,
 		in_0 => if_adder_out,
-		in_1 => mem_pc,
+		in_1 => mem_branch_pc,
+		mux_out => if_mux_pcsrc_out
+	);
+	
+	SHIFT_LEFT_2_JUMP_inst : entity work.SHIFT_LEFT_2 port map (
+		data_in  => id_jump_imm,
+		data_out => id_jump_pc
+	);
+	
+	SIGN_EXTEND_25_to_32_inst : entity work.SIGN_EXTEND
+		generic map (
+			input_size => 26,
+			output_size => 32
+		)
+		port map (
+			data_in => id_instruction(25 downto 0),
+			data_out => id_jump_imm
+		);
+	
+	MUX_JUMPSrc_inst: entity work.MUX port map (
+		sel => id_control_jumpsrc,
+		in_0 => id_read_data1,
+		in_1 => id_jump_pc,
+		mux_out => if_mux_jumpsrc_out
+	);
+	
+	MUX_PC_inst: entity work.MUX port map (
+		sel => id_control_jump,
+		in_0 => if_mux_pcsrc_out,
+		in_1 => if_mux_jumpsrc_out,
 		mux_out => pc_in
 	);
 	
@@ -116,9 +152,14 @@ begin
 	);
 	
 	-- ID
+	-- pc_in <= unsigned("000000" & id_instruction(25 downto 0)) when id_instruction(31 downto 26) = "000010" else -- J
+	--				 id_read_data1 when id_instruction(31 downto 26) = "000000" and id_instruction(5 downto 0) = "001000"; -- JR
+	
 	CONTROL_inst : entity work.CONTROL port map(
 		opcode => id_instruction(31 downto 26),
 		funct => id_instruction(5 downto 0),
+		jump => id_control_jump, -- ID
+		jump_src => id_control_jumpsrc, -- ID
 		reg_dst	=> id_control_regdst, -- EX
 		alu_op => id_control_aluop, -- EX
 		alu_src	=> id_control_alusrc, -- EX
@@ -139,10 +180,15 @@ begin
 		read_data2 => id_read_data2
 	);
 	
-	SIGN_EXTEND_inst: entity work.SIGN_EXTEND port map(
-		data_in => id_instruction(15 downto 0),
-    data_out => id_sign_extend_out
-	);
+	SIGN_EXTEND_inst: entity work.SIGN_EXTEND 
+		generic map (
+			input_size => 16,
+			output_size => 32
+		)
+		port map(
+			data_in => id_instruction(15 downto 0),
+			data_out => id_sign_extend_out
+		);
 	
 	-- ID/EX
 	ID_EX_REG_inst : entity work.ID_EX_REG port map (
@@ -231,7 +277,7 @@ begin
 		 mem_write_out => mem_control_memwrite, -- MEM
 		 reg_write_out => mem_control_regwrite, -- WB
 		 mem_to_reg_out	=> mem_control_memtoreg, -- WB
-		 pc_out	=> mem_pc,
+		 pc_out	=> mem_branch_pc,
 		 cond_out	=> mem_cond,
 		 alu_output_out => mem_alu_result,
 		 write_data_out => mem_write_data,

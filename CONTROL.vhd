@@ -5,7 +5,8 @@ entity CONTROL is
 	port(
 			 opcode 					: in std_logic_vector(5 downto 0);
 			 funct						: in std_logic_vector(5 downto 0);
-			 jump 						: out std_logic; -- ID/EX
+			 jump 						: out std_logic; -- ID
+			 jump_src					: out std_logic; -- ID
 			 reg_dst					: out std_logic; -- EX
 			 alu_op 					: out std_logic_vector(2 downto 0); -- EX
 			 alu_src					: out std_logic; -- EX
@@ -30,6 +31,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '1';
 				mem_to_reg <= '1';
+				jump <= '0';
 				case funct is
 					when "100111" => -- NOR
 						alu_op <= "001";
@@ -40,6 +42,8 @@ begin
 					when "100000" => -- ADD
 						alu_op <= "100";
 					when "001000" => -- JR
+						jump <= '1';
+						jump_src <= '0';
 						alu_op <= "000";
 						mem_to_reg <= 'X';
 					when others => 
@@ -56,6 +60,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '1';
 				mem_to_reg <= '1';
+				jump <= '0';
 			when "000001" => -- SUBUI
 				reg_dst <= '1';
 				alu_op <= "101";
@@ -65,6 +70,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '1';
 				mem_to_reg <= '1';
+				jump <= '0';
 			when "000100" => -- BEQ
 				reg_dst <= 'X';
 				alu_op <= "110";
@@ -74,6 +80,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '0';
 				mem_to_reg <= 'X';
+				jump <= '0';
 			when "100011" => -- LW
 				reg_dst <= '0';  -- rt
 				alu_op <= "100"; -- +
@@ -83,6 +90,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '1';
 				mem_to_reg <= '1';
+				jump <= '0';
 			when "101000" => -- SB
 				reg_dst <= 'X';
 				alu_op <= "100"; -- +
@@ -92,11 +100,14 @@ begin
 				mem_write <= '1';
 				reg_write <= '0';
 				mem_to_reg <= 'X';
+				jump <= '0';
 			-- J-type
 			when "000010" =>
 				reg_dst <= '0';
 				alu_op <= "111";
 				alu_src <= 'X';
+				jump <= '1';
+				jump_src <= '1';
 				branch <= '0';
 				mem_read <= '0';
 				mem_write <= '0';
@@ -111,6 +122,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '0';
 				mem_to_reg <= 'X';
+				jump <= '0';
 		end case;
 	end process;
 end RTL;

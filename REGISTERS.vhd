@@ -3,7 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity REGISTERS is
-	port(clk				: in std_logic;
+	port(
 			 reg_write  : in std_logic; -- control signal
 			 read_reg1	: in std_logic_vector(4 downto 0);
 			 read_reg2	: in std_logic_vector(4 downto 0);
@@ -16,22 +16,24 @@ end REGISTERS;
 architecture RTL of REGISTERS is
 	type reg_array is array (0 to 31) of unsigned(31 downto 0);
 	signal reg_file : reg_array := (
-		1 => x"55555555",
-		2 => x"AAAAAAAA",
+		1 => x"66666666",
+		2 => x"CCCCCCCC",
+		3 => x"66666666",
+		4 => x"00000001",
 		others => (others => '0')
 	);
 begin
 
-process(clk)
+process(reg_write, read_reg1, read_reg2, write_reg, write_data)
 begin
-	if rising_edge(clk) then
-		read_data1 <= reg_file(to_integer(unsigned(read_reg1)));
-		read_data2 <= reg_file(to_integer(unsigned(read_reg2)));
-		
-		 -- Write data to register if write enable is high
-		if write_reg /= "00000" and reg_write = '1' then
-				reg_file(to_integer(unsigned(write_reg))) <= write_data;
-		end if;
-	end if;
+
+read_data1 <= reg_file(to_integer(unsigned(read_reg1)));
+read_data2 <= reg_file(to_integer(unsigned(read_reg2)));
+
+-- Write data to register if write enable is high
+if write_reg /= "00000" and reg_write = '1' then
+	reg_file(to_integer(unsigned(write_reg))) <= write_data;
+end if;
+
 end process;
 end RTL;

@@ -46,7 +46,7 @@ begin
 		alu_src_out <= alu_src_in;
 		branch_out <= branch_in;
 		mem_read_out <= mem_read_in;
-		mem_write_out <= mem_read_in;
+		mem_write_out <= mem_write_in;
 		reg_write_out <= reg_write_in;
 		mem_to_reg_out <= mem_to_reg_in;
 		pc_out <= pc_in;

@@ -2,8 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity CONTROL is
-	port(opcode 					: in std_logic_vector(5 downto 0);
+	port(
+			 opcode 					: in std_logic_vector(5 downto 0);
 			 funct						: in std_logic_vector(5 downto 0);
+			 jump 						: out std_logic; -- ID/EX
 			 reg_dst					: out std_logic; -- EX
 			 alu_op 					: out std_logic_vector(2 downto 0); -- EX
 			 alu_src					: out std_logic; -- EX
@@ -27,7 +29,7 @@ begin
 				mem_read <= '0';
 				mem_write <= '0';
 				reg_write <= '1';
-				mem_to_reg <= '0';
+				mem_to_reg <= '1';
 				case funct is
 					when "100111" => -- NOR
 						alu_op <= "001";
@@ -39,8 +41,10 @@ begin
 						alu_op <= "100";
 					when "001000" => -- JR
 						alu_op <= "000";
+						mem_to_reg <= 'X';
 					when others => 
-						alu_op <= "100"; -- Default ADD
+						alu_op <= "XXX"; 
+						mem_to_reg <= 'X';
 				end case;
 			-- I-type
 			when "001100" => -- ADDI
@@ -51,7 +55,7 @@ begin
 				mem_read <= '0';
 				mem_write <= '0';
 				reg_write <= '1';
-				mem_to_reg <= '0';
+				mem_to_reg <= '1';
 			when "000001" => -- SUBUI
 				reg_dst <= '1';
 				alu_op <= "101";
@@ -60,18 +64,18 @@ begin
 				mem_read <= '0';
 				mem_write <= '0';
 				reg_write <= '1';
-				mem_to_reg <= '0';
+				mem_to_reg <= '1';
 			when "000100" => -- BEQ
 				reg_dst <= 'X';
 				alu_op <= "110";
-				alu_src <= '1';
+				alu_src <= '0';
 				branch <= '1';
 				mem_read <= '0';
 				mem_write <= '0';
 				reg_write <= '0';
-				mem_to_reg <= '0';
+				mem_to_reg <= 'X';
 			when "100011" => -- LW
-				reg_dst <= '0';
+				reg_dst <= '0';  -- rt
 				alu_op <= "100"; -- +
 				alu_src <= '1';
 				branch <= '0';
@@ -91,22 +95,22 @@ begin
 			-- J-type
 			when "000010" =>
 				reg_dst <= '0';
-				alu_op <= "000";
+				alu_op <= "111";
 				alu_src <= 'X';
-				branch <= '1';
-				mem_read <= '0';
-				mem_write <= '0';
-				reg_write <= '0';
-				mem_to_reg <= '0';
-			when others => -- Default ADDI
-				reg_dst <= '1';
-				alu_op <= "100";
-				alu_src <= '1';
 				branch <= '0';
 				mem_read <= '0';
 				mem_write <= '0';
-				reg_write <= '1';
-				mem_to_reg <= '0';
+				reg_write <= '0';
+				mem_to_reg <= 'X';
+			when others => -- Default ADDI
+				reg_dst <= 'X';
+				alu_op <= "XXX";
+				alu_src <= 'X';
+				branch <= '0';
+				mem_read <= '0';
+				mem_write <= '0';
+				reg_write <= '0';
+				mem_to_reg <= 'X';
 		end case;
 	end process;
 end RTL;

@@ -10,5 +10,7 @@ end ADDER;
 
 architecture RTL of ADDER is
 begin
-	output <= input_1 + input_2;
+
+output <= input_1 + input_2;
+
 end RTL;

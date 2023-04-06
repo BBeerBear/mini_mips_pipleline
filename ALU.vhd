@@ -19,15 +19,17 @@ begin
 			alu_output <= alu_in_1 nor alu_in_2;
 		when "010" => -- SLL
 			alu_output <= shift_left(alu_in_2, 2);
+		when "011" => -- XOR
+			alu_output <= alu_in_1 xor alu_in_2;
 		when "100" => -- ADD, ADDI
 			alu_output <= alu_in_1 + alu_in_2;
 		when "101" => -- SUBUI
 			alu_output <= alu_in_1 - alu_in_2;
 		when "110" => -- BEQ
 			if alu_in_1 = alu_in_2 then
-				alu_cond <= '0';
-			else
 				alu_cond <= '1';
+			else
+				alu_cond <= '0';
 			end if;
 			alu_output <= x"00000000";
 		when others => 

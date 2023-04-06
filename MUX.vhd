@@ -12,10 +12,10 @@ architecture RTL of MUX is
 begin
 process (sel, in_0, in_1) is
 begin
-if sel = '0' then
-		mux_out <= in_0;
-else
+if sel = '1' then
 		mux_out <= in_1;
+else
+		mux_out <= in_0;
 end if;
 end process;
 end RTL;

@@ -8,10 +8,14 @@ end MINI_MIPS;
 
 architecture RTL of MINI_MIPS is
 
+signal first_pc								: std_logic := '1';
+signal first_pc_out 					: std_logic := '1';
 -- IF signal
-signal if_pc_in, if_pc_out : unsigned(31 downto 0);
-signal if_adder_out : unsigned(31 downto 0);
-signal if_instruction: std_logic_vector(31 downto 0);
+signal pc_in 									: unsigned(31 downto 0);
+signal pc_out 								: unsigned(31 downto 0);
+signal if_adder_out 					: unsigned(31 downto 0);
+signal if_instruction					: std_logic_vector(31 downto 0);
+signal if_pcsrc							  : std_logic;
 
 -- ID signal
 signal id_instruction 				: std_logic_vector(31 downto 0);
@@ -27,8 +31,6 @@ signal id_control_memtoreg		: std_logic; -- WB
 signal id_read_data1					: unsigned(31 downto 0); -- read data1
 signal id_read_data2					: unsigned(31 downto 0); -- read data2
 signal id_sign_extend_out	  	: unsigned(31 downto 0); -- sign extend output
-signal id_rt									: std_logic_vector(4 downto 0); -- rt
-signal id_rd									: std_logic_vector(4 downto 0); -- rd
 
 -- EX signal
 signal ex_control_regdst 			: std_logic; -- EX
@@ -42,11 +44,10 @@ signal ex_control_memtoreg		: std_logic; -- WB
 signal ex_pc									: unsigned(31 downto 0);
 signal ex_adder_out						: unsigned(31 downto 0);
 signal ex_alu_in1							: unsigned(31 downto 0);
-signal ex_alusrcmux_in0				: unsigned(31 downto 0);
+signal ex_read_data2				: unsigned(31 downto 0);
 signal ex_alu_in2 						: unsigned(31 downto 0);
 signal ex_alu_cond						: std_logic;
 signal ex_alu_result    			: unsigned(31 downto 0);
-signal ex_read_data2					: unsigned(31 downto 0);
 signal ex_shift_left_2_in			: unsigned(31 downto 0);
 signal ex_shift_left_2_out 		: unsigned(31 downto 0);
 signal ex_rt									: std_logic_vector(4 downto 0);
@@ -65,7 +66,6 @@ signal mem_alu_result    			: unsigned(31 downto 0);
 signal mem_write_data					: unsigned(31 downto 0);
 signal mem_write_reg		  		: std_logic_vector(4 downto 0);
 signal mem_read_data					: unsigned(31 downto 0);
-signal mem_pcsrc							: std_logic;
 
 -- WB signal
 signal wb_control_regwrite 		: std_logic; -- control signal RegWrite
@@ -76,29 +76,33 @@ signal wb_alu_output					: unsigned(31 downto 0);
 signal wb_write_data					: unsigned(31 downto 0);
 
 begin
-	-- IF
-	MUX_PCSrc_inst: entity work.MUX port map (
-		sel => mem_pcsrc,
-		in_0 => if_adder_out,
-		in_1 => mem_pc,
-		mux_out => if_pc_in
-	);
+	-- PC
 	
 	PC_inst: entity work.PC port map (
 		clk => clk,
-		addr_next => if_pc_in,
-		addr_now => if_pc_out
+		first_pc_in => first_pc,
+		addr_next => pc_in,
+		addr_now => pc_out,
+		first_pc_out => first_pc_out
 	);
+	first_pc <= first_pc_out when first_pc_out /= 'U';
 	
+	--IF
 	ADDER_IF_inst: entity work.ADDER port map (
-		input_1 => if_pc_out,
+		input_1 => pc_out,
 		input_2 => x"00000004",
 		output => if_adder_out
 	);
 	
+	MUX_PCSrc_inst: entity work.MUX port map (
+		sel => if_pcsrc,
+		in_0 => if_adder_out,
+		in_1 => mem_pc,
+		mux_out => pc_in
+	);
+	
 	INST_MEM_inst: entity work.INSTRUCTION_MEMORY port map (
-		clk => clk,
-		addr => if_pc_out,
+		addr => pc_out,
 		instruction => if_instruction
 	);
 	
@@ -126,7 +130,6 @@ begin
 	);
 	
 	REGISTERS_inst : entity work.REGISTERS port map (
-		clk => clk,
 		reg_write => wb_control_regwrite,
 		read_reg1 => id_instruction(25 downto 21),
 		read_reg2 => id_instruction(20 downto 16),
@@ -156,8 +159,8 @@ begin
 		read_data1_in	=> id_read_data1,
 		read_data2_in => id_read_data2,
 		sign_extend_in => id_sign_extend_out,
-		rt_addr_in => id_rt,
-		rd_addr_in => id_rd,
+		rt_addr_in => id_instruction(20 downto 16),
+		rd_addr_in => id_instruction(15 downto 11),
 		
 		reg_dst_out => ex_control_regdst,
 		alu_op_out => ex_control_aluop,
@@ -169,7 +172,7 @@ begin
 		mem_to_reg_out => ex_control_memtoreg,
 		pc_out => ex_pc,
 		read_data1_out => ex_alu_in1,
-		read_data2_out => ex_alusrcmux_in0,
+		read_data2_out => ex_read_data2,
 		sign_extend_out	=> ex_shift_left_2_in,
 		rt_addr_out	=> ex_rt,
 		rd_addr_out	=> ex_rd
@@ -185,7 +188,7 @@ begin
 	
 	MUX_ALUSrc_inst: entity work.MUX port map (
 		sel => ex_control_alusrc,
-		in_0 => ex_alusrcmux_in0,
+		in_0 => ex_read_data2,
 		in_1 => ex_shift_left_2_in,
 		mux_out => ex_alu_in2
 	);
@@ -240,11 +243,10 @@ begin
 	AND_PCSrc_inst : entity work.AND_PCSrc port map (
 		branch => mem_control_branch,
 		cond => mem_cond,
-		pcsrc	=> mem_pcsrc
+		pcsrc	=> if_pcsrc
 	);
 	
 	DATA_MEMORY_inst : entity work.DATA_MEMORY port map (
-		clk => clk,
 		mem_write => mem_control_memwrite,
 		mem_read => mem_control_memread,
 		address => mem_alu_result,

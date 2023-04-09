@@ -1,4 +1,29 @@
-C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd
+C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_C.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS_C.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MINI_MIPS
+-- Compiling architecture RTL of MINI_MIPS
+-- Loading entity PC
+-- Loading entity ADDER
+-- Loading entity MUX
+-- Loading entity SHIFT_LEFT_2
+-- Loading entity SIGN_EXTEND
+-- Loading entity INSTRUCTION_MEMORY
+-- Loading entity IF_ID_REG
+-- Loading entity CONTROL
+-- Loading entity REGISTERS
+-- Loading entity ID_EX_REG
+-- Loading entity MUX_RegDst
+-- Loading entity ALU
+-- Loading entity EX_MEM_REG
+-- Loading entity AND_PCSrc
+-- Loading entity DATA_MEMORY
+-- Loading entity MEM_WB_REG
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/REGISTERS.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
@@ -63,31 +88,6 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package NUMERIC_STD
 -- Compiling entity MEM_WB_REG
 -- Compiling architecture RTL of MEM_WB_REG
-
-} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MINI_MIPS.vhd
-Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity MINI_MIPS
--- Compiling architecture RTL of MINI_MIPS
--- Loading entity PC
--- Loading entity ADDER
--- Loading entity MUX
--- Loading entity SHIFT_LEFT_2
--- Loading entity SIGN_EXTEND
--- Loading entity INSTRUCTION_MEMORY
--- Loading entity IF_ID_REG
--- Loading entity CONTROL
--- Loading entity REGISTERS
--- Loading entity ID_EX_REG
--- Loading entity MUX_RegDst
--- Loading entity ALU
--- Loading entity EX_MEM_REG
--- Loading entity AND_PCSrc
--- Loading entity DATA_MEMORY
--- Loading entity MEM_WB_REG
 
 } {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/AND_PCSrc.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/AND_PCSrc.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -167,5 +167,14 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package NUMERIC_STD
 -- Compiling entity ALU
 -- Compiling architecture RTL of ALU
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity PC
+-- Compiling architecture RTL of PC
 
 } {} {}}

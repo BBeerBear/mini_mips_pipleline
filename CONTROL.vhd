@@ -113,7 +113,7 @@ begin
 				mem_write <= '0';
 				reg_write <= '0';
 				mem_to_reg <= 'X';
-			when others => -- Default ADDI
+			when others => -- 
 				reg_dst <= 'X';
 				alu_op <= "XXX";
 				alu_src <= 'X';

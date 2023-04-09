@@ -4,10 +4,9 @@ use ieee.numeric_std.all;
 
 entity PC is
 	port(	clk						: in std_logic;
-				first_pc_in  	: in std_logic;
-				addr_next			: in unsigned(31 downto 0);
-				addr_now			: out unsigned(31 downto 0);
-				first_pc_out	: out std_logic);
+				reset					: in std_logic;
+				pc_in					: in unsigned(31 downto 0);
+				pc_out      	: out unsigned(31 downto 0));
 end PC;
 
 architecture RTL of PC is
@@ -16,11 +15,10 @@ begin
 process(clk)
 begin
 	if rising_edge(clk) then
-		if first_pc_in = '1' then
-			addr_now <= x"00000004";
-			first_pc_out <= '0';
+		if reset='0' then
+			pc_out <= x"00000004";
 		else
-			addr_now  <= addr_next;
+			pc_out <= pc_in;
 		end if;
 	end if;
 end process;

@@ -84,7 +84,7 @@ signal wb_write_data					: unsigned(31 downto 0);
 begin
 	-- PC
 	
-	PC_inst: PC port map (
+	PC_inst: entity work.PC port map (
 		clk => clk,
 		first_pc_in => first_pc,
 		addr_next => pc_in,
@@ -94,25 +94,25 @@ begin
 	first_pc <= first_pc_out when first_pc_out /= 'U';
 	
 	--IF
-	ADDER_IF_inst: ADDER port map (
+	ADDER_IF_inst: entity work.ADDER port map (
 		input_1 => pc_out,
 		input_2 => x"00000004",
 		output => if_adder_out
 	);
 	
-	MUX_PCSrc_inst: MUX port map (
+	MUX_PCSrc_inst: entity work.MUX port map (
 		sel => if_pcsrc,
 		in_0 => if_adder_out,
 		in_1 => mem_branch_pc,
 		mux_out => if_mux_pcsrc_out
 	);
 	
-	SHIFT_LEFT_2_JUMP_inst : SHIFT_LEFT_2 port map (
+	SHIFT_LEFT_2_JUMP_inst : entity work.SHIFT_LEFT_2 port map (
 		data_in  => id_jump_imm,
 		data_out => id_jump_pc
 	);
 	
-	SIGN_EXTEND_25_to_32_inst : SIGN_EXTEND
+	SIGN_EXTEND_25_to_32_inst : entity work.SIGN_EXTEND
 		generic map (
 			input_size => 26,
 			output_size => 32
@@ -122,27 +122,27 @@ begin
 			data_out => id_jump_imm
 		);
 	
-	MUX_JUMPSrc_inst: MUX port map (
+	MUX_JUMPSrc_inst: entity work.MUX port map (
 		sel => id_control_jumpsrc,
 		in_0 => id_read_data1,
 		in_1 => id_jump_pc,
 		mux_out => if_mux_jumpsrc_out
 	);
 	
-	MUX_PC_inst: MUX port map (
+	MUX_PC_inst: entity work.MUX port map (
 		sel => id_control_jump,
 		in_0 => if_mux_pcsrc_out,
 		in_1 => if_mux_jumpsrc_out,
 		mux_out => pc_in
 	);
 	
-	INST_MEM_inst: INSTRUCTION_MEMORY port map (
+	INST_MEM_inst: entity work.INSTRUCTION_MEMORY port map (
 		addr => pc_out,
 		instruction => if_instruction
 	);
 	
 	-- IF/ID
-	IF_ID_REG_inst : IF_ID_REG port map(
+	IF_ID_REG_inst : entity work.IF_ID_REG port map(
 		clk => clk,
 		instruction_in => if_instruction,
 		pc_in => if_adder_out,
@@ -154,7 +154,7 @@ begin
 	-- pc_in <= unsigned("000000" & id_instruction(25 downto 0)) when id_instruction(31 downto 26) = "000010" else -- J
 	--				 id_read_data1 when id_instruction(31 downto 26) = "000000" and id_instruction(5 downto 0) = "001000"; -- JR
 	
-	CONTROL_inst : CONTROL port map(
+	CONTROL_inst : entity work.CONTROL port map(
 		opcode => id_instruction(31 downto 26),
 		funct => id_instruction(5 downto 0),
 		jump => id_control_jump, -- ID
@@ -169,7 +169,7 @@ begin
 		mem_to_reg => id_control_memtoreg -- WB
 	);
 	
-	REGISTERS_inst : REGISTERS port map (
+	REGISTERS_inst : entity work.REGISTERS port map (
 		reg_write => wb_control_regwrite,
 		read_reg1 => id_instruction(25 downto 21),
 		read_reg2 => id_instruction(20 downto 16),
@@ -179,7 +179,7 @@ begin
 		read_data2 => id_read_data2
 	);
 	
-	SIGN_EXTEND_inst: SIGN_EXTEND 
+	SIGN_EXTEND_inst: entity work.SIGN_EXTEND 
 		generic map (
 			input_size => 16,
 			output_size => 32
@@ -190,7 +190,7 @@ begin
 		);
 	
 	-- ID/EX
-	ID_EX_REG_inst : ID_EX_REG port map (
+	ID_EX_REG_inst : entity work.ID_EX_REG port map (
 		clk => clk,
 		reg_dst_in => id_control_regdst,
 		alu_op_in	=> id_control_aluop,
@@ -224,21 +224,21 @@ begin
 	);
 	
 	-- EX
-	MUX_RegDst_inst: MUX_RegDst port map (
+	MUX_RegDst_inst: entity work.MUX_RegDst port map (
 		sel => ex_control_regdst,
 		in_0 => ex_rt,
 		in_1 => ex_rd,
 		mux_out => ex_regdstmux_out
 	);
 	
-	MUX_ALUSrc_inst: MUX port map (
+	MUX_ALUSrc_inst: entity work.MUX port map (
 		sel => ex_control_alusrc,
 		in_0 => ex_read_data2,
 		in_1 => ex_shift_left_2_in,
 		mux_out => ex_alu_in2
 	);
 	
-	ALU_inst : ALU port map (
+	ALU_inst : entity work.ALU port map (
 		alu_in_1 => ex_alu_in1,
 		alu_in_2 => ex_alu_in2,
 		alu_op => ex_control_aluop,
@@ -246,19 +246,19 @@ begin
 		alu_output => ex_alu_result
 	);
 	
-	SHIFT_LEFT_2_inst : SHIFT_LEFT_2 port map (
+	SHIFT_LEFT_2_inst : entity work.SHIFT_LEFT_2 port map (
 		data_in => ex_shift_left_2_in,
     data_out => ex_shift_left_2_out
 	);
 	
-	ADDER_EX_inst : ADDER port map (
+	ADDER_EX_inst : entity work.ADDER port map (
 		input_1 => ex_pc,
 		input_2 => ex_shift_left_2_out,
 		output => ex_adder_out
 	);
 	
 	-- EX/MEM
-	EX_MEM_REG_inst: EX_MEM_REG port map (
+	EX_MEM_REG_inst: entity work.EX_MEM_REG port map (
 		 clk => clk,
 		 branch_in => ex_control_branch, -- MEM
 		 mem_read_in => ex_control_memread, -- MEM
@@ -285,13 +285,13 @@ begin
 	
   -- MEM
 	
-	AND_PCSrc_inst : AND_PCSrc port map (
+	AND_PCSrc_inst : entity work.AND_PCSrc port map (
 		branch => mem_control_branch,
 		cond => mem_cond,
 		pcsrc	=> if_pcsrc
 	);
 	
-	DATA_MEMORY_inst : DATA_MEMORY port map (
+	DATA_MEMORY_inst : entity work.DATA_MEMORY port map (
 		mem_write => mem_control_memwrite,
 		mem_read => mem_control_memread,
 		address => mem_alu_result,
@@ -300,7 +300,7 @@ begin
 	);
 	
 	-- MEM/WB
-	MEM_WB_REG_inst : MEM_WB_REG port map (
+	MEM_WB_REG_inst : entity work.MEM_WB_REG port map (
 		 clk => clk,
 		 reg_write_in => mem_control_regwrite, -- WB
 		 mem_to_reg_in => mem_control_memtoreg, -- WB
@@ -316,7 +316,7 @@ begin
 	);
 	
 	-- WB
-	MUX_MemtoReg_inst : MUX port map (
+	MUX_MemtoReg_inst : entity work.MUX port map (
 		sel => wb_control_memtoreg,
 		in_0 => wb_read_data,
 		in_1 => wb_alu_output,

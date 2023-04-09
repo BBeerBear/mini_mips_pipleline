@@ -3,8 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity DATA_MEMORY is
-	port(
-			 mem_write  : in std_logic;
+	port(mem_write  : in std_logic;
 			 mem_read		: in std_logic;
 			 address 		: in unsigned(31 downto 0);
 			 write_data : in unsigned(31 downto 0);

@@ -3,8 +3,7 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity INSTRUCTION_MEMORY is
-	port(
-				addr		 		: in unsigned(31 downto 0);
+	port(	addr		 		: in unsigned(31 downto 0);
 				instruction : out std_logic_vector(31 downto 0));
 end INSTRUCTION_MEMORY;
 
@@ -29,9 +28,9 @@ architecture RTL of INSTRUCTION_MEMORY is
 	--	14 => "00000001101000000000000000001000", -- JR $13
 	--	18 => "00001000000000000000000000000100", -- J 4
 		1 => "00000000001000101000100000100000", -- ADD $3,$1,$2
-		2 => "00000000001000100100000000100111", -- NOR $4,$1,$3   
-		3 => "00000000001000010110000010000000", -- SLL $5,$1,3 
-		5 => "00000000001000100011000000100110", -- XOR $6,$1,$2
+		2 => "00000000011000010010000000100111", -- NOR $4,$3,$1   
+		3 => "00000000001000110010100000100110", -- XOR $5,$1,$3
+		4 => "00000000001000110011000000100000", -- ADD $6,$1,$3
 		others => (others => '0')
 	);
 begin

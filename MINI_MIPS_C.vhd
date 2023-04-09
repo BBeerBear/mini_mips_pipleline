@@ -4,7 +4,8 @@ use ieee.numeric_std.all;
 
 entity MINI_MIPS is
 	port(clk			: in std_logic;
-			 reset		: in std_logic);
+			 reset		: in std_logic
+			 wb_write_data : out unsigned(31 downto 0);
 end MINI_MIPS;
 
 architecture RTL of MINI_MIPS is

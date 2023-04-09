@@ -12,7 +12,7 @@ end PC;
 architecture RTL of PC is
 begin
 
-process(clk)
+process(clk, reset)
 begin
 	if rising_edge(clk) then
 		if reset='0' then

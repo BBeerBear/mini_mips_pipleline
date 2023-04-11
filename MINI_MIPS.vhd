@@ -39,6 +39,7 @@ signal id_jump_imm						: unsigned(31 downto 0);
 signal id_cond								: std_logic;
 signal id_shift_left_out			: unsigned(31 downto 0);
 signal id_adder_out						: unsigned(31 downto 0);
+signal id_flush								: std_logic;
 
 -- EX signal
 signal ex_control_regdst 			: std_logic; -- EX
@@ -87,20 +88,34 @@ signal wb_write_data					: unsigned(31 downto 0);
 -- Harzard signal
 signal forward_data1 					: std_logic_vector(1 downto 0);
 signal forward_data2 					: std_logic_vector(1 downto 0);
+signal if_stall								: std_logic;
+signal id_stall 							: std_logic;
+signal ex_flush								: std_logic;
 begin
 	-- Harzard Unit
 	HARZARD_UNIT_inst : entity work.HARZARD_UNIT port map(
-		rs => ex_rs,
-		rt => ex_rt,
+		ex_rs => ex_rs,
+		ex_rt => ex_rt,
 		mem_write_reg => mem_write_reg,
 		wb_write_reg => wb_write_reg,
+		id_rs => id_instruction(25 downto 21),
+		id_rt => id_instruction(20 downto 16),
+		ex_mem_to_reg => id_control_memtoreg,
+		pc_src => if_pcsrc,
+		id_pc	=> id_pc,
+		branch_addr	=> id_adder_out,
 		forward_data1 => forward_data1,
-		forward_data2 => forward_data2
+		forward_data2 => forward_data2,
+		if_stall => if_stall,
+		id_stall => id_stall,
+		ex_flush => ex_flush,
+		id_flush => id_flush
 	);
 
 	-- PC
 	PC_inst: entity work.PC port map (
 		clk => clk,
+		if_stall => if_stall,
 		reset => reset,
 		pc_in => pc_in,
 		pc_out => pc_out
@@ -157,6 +172,8 @@ begin
 	-- IF/ID
 	IF_ID_REG_inst : entity work.IF_ID_REG port map(
 		clk => clk,
+		id_flush => id_flush,
+		id_stall => id_stall,
 		instruction_in => if_instruction,
 		pc_in => if_adder_out,
 		instruction_out => id_instruction,
@@ -216,7 +233,7 @@ begin
     data_out => id_shift_left_out
 	);
 	
-	ADDER_EX_inst : entity work.ADDER port map (
+	ADDER_ID_inst : entity work.ADDER port map (
 		input_1 => id_pc,
 		input_2 => id_shift_left_out,
 		output => id_adder_out
@@ -225,6 +242,8 @@ begin
 	-- ID/EX
 	ID_EX_REG_inst : entity work.ID_EX_REG port map (
 		clk => clk,
+		ex_flush => ex_flush,
+		
 		reg_dst_in => id_control_regdst,
 		alu_op_in	=> id_control_aluop,
 		alu_src_in => id_control_alusrc,
@@ -286,7 +305,7 @@ begin
 	);
 	
 	ALU_inst : entity work.ALU port map (
-		alu_in_1 => ex_read_data1,
+		alu_in_1 => ex_alu_in1,
 		alu_in_2 => ex_alu_in2,
 		alu_op => ex_control_aluop,
 		alu_output => ex_alu_result
@@ -295,6 +314,7 @@ begin
 	-- EX/MEM
 	EX_MEM_REG_inst: entity work.EX_MEM_REG port map (
 		 clk => clk,
+		 
 		 mem_read_in => ex_control_memread, -- MEM
 		 mem_write_in	=> ex_control_memwrite, -- MEM
 		 reg_write_in => ex_control_regwrite, -- WB

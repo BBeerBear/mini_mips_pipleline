@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 entity EX_MEM_REG is
 	port(clk 							: in std_logic;
-	
+			 
 			 mem_read_in			: in std_logic; -- MEM
 			 mem_write_in			: in std_logic; -- MEM
 			 reg_write_in			: in std_logic; -- WB

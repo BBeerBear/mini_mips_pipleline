@@ -31,10 +31,13 @@ begin
 	if write_reg /= "00000" and reg_write = '1' then
 		reg_file(to_integer(unsigned(write_reg))) <= write_data;
 	end if;
-
-	
-	read_data1 <= reg_file(to_integer(unsigned(read_reg1)));
-	read_data2 <= reg_file(to_integer(unsigned(read_reg2)));
-
+	if write_reg = read_reg1 then 
+		read_data1 <= write_data;
+	elsif write_reg = read_reg2 then 
+		read_data2 <= write_data;
+	else
+		read_data1 <= reg_file(to_integer(unsigned(read_reg1)));
+		read_data2 <= reg_file(to_integer(unsigned(read_reg2)));
+	end if;
 end process;
 end RTL;

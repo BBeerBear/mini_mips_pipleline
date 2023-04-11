@@ -14,7 +14,8 @@ entity CONTROL is
 			 mem_read					: out std_logic; -- MEM
 			 mem_write				: out std_logic; -- MEM
 			 reg_write				: out std_logic; -- WB
-			 mem_to_reg				: out std_logic); -- WB
+			 mem_to_reg				: out std_logic
+	); -- WB
 end CONTROL;
 
 architecture RTL of CONTROL is
@@ -89,7 +90,7 @@ begin
 				mem_read <= '1';
 				mem_write <= '0';
 				reg_write <= '1';
-				mem_to_reg <= '1';
+				mem_to_reg <= '0';
 				jump <= '0';
 			when "101000" => -- SB
 				reg_dst <= 'X';

@@ -12,11 +12,11 @@ end DATA_MEMORY;
 
 architecture RTL of DATA_MEMORY is
 	type mem_type is array(0 to 2**20 - 1) of unsigned(31 downto 0);
-	signal mem : mem_type;
-	-- := (
-		-- 3 => x"12345678",
-		-- others => (others => '0')
-	-- );
+	signal mem : mem_type
+	 := (
+		3 => x"0000000B",
+		others => (others => '0')
+	 );
 begin
 	process(mem_write, mem_read, address, write_data)
 	begin

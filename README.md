@@ -1,1 +1,1 @@
-# mini_mips_pipleline
+# Pipelined Mips Design (32-bit)

@@ -127,13 +127,14 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling entity EX_MEM_REG
 -- Compiling architecture RTL of EX_MEM_REG
 
-} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/CONTROL.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/CONTROL.vhd
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/IF_ID_REG.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/IF_ID_REG.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Compiling entity CONTROL
--- Compiling architecture RTL of CONTROL
+-- Loading package NUMERIC_STD
+-- Compiling entity IF_ID_REG
+-- Compiling architecture behavioral of IF_ID_REG
 
 } {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/SHIFT_LEFT_2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/SHIFT_LEFT_2.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -144,23 +145,13 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling entity SHIFT_LEFT_2
 -- Compiling architecture Behavioral of SHIFT_LEFT_2
 
-} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/DATA_MEMORY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/DATA_MEMORY.vhd
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/CONTROL.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/CONTROL.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity DATA_MEMORY
--- Compiling architecture RTL of DATA_MEMORY
-
-} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd
-Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity MUX
--- Compiling architecture RTL of MUX
+-- Compiling entity CONTROL
+-- Compiling architecture RTL of CONTROL
 
 } {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/ALU.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/ALU.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
@@ -171,6 +162,34 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Compiling entity ALU
 -- Compiling architecture RTL of ALU
 
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/MUX.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity MUX
+-- Compiling architecture RTL of MUX
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/DATA_MEMORY.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/DATA_MEMORY.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity DATA_MEMORY
+-- Compiling architecture RTL of DATA_MEMORY
+
+} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/HARZARD_UNIT.vhd {2 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/HARZARD_UNIT.vhd
+Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package NUMERIC_STD
+-- Compiling entity HARZARD_UNIT
+-- Compiling architecture RTL of HARZARD_UNIT
+** Warning: C:/Code/vhdl-learning/pipeline_mips_vhdl/HARZARD_UNIT.vhd(28): (vcom-1445) Duplicate signal "id_rs" found in sensitivity list.
+
 } {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/PC.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package STANDARD
@@ -179,15 +198,6 @@ Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
 -- Loading package NUMERIC_STD
 -- Compiling entity PC
 -- Compiling architecture RTL of PC
-
-} {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/HARZARD_UNIT.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/HARZARD_UNIT.vhd
-Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package NUMERIC_STD
--- Compiling entity HARZARD_UNIT
--- Compiling architecture RTL of HARZARD_UNIT
 
 } {} {}} C:/Code/vhdl-learning/pipeline_mips_vhdl/ISZERO.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none C:/Code/vhdl-learning/pipeline_mips_vhdl/ISZERO.vhd
 Model Technology ModelSim SE-64 vcom 10.6d Compiler 2018.02 Feb 24 2018

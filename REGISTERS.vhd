@@ -20,7 +20,7 @@ architecture RTL of REGISTERS is
 		2 => x"CCCCCCCC",
 		3 => x"66666666",
 		4 => x"00000001",
-		13 => x"00000048",
+		13 => x"00000038",
 		others => (others => '0')
 	);
 begin
@@ -31,9 +31,9 @@ begin
 	if write_reg /= "00000" and reg_write = '1' then
 		reg_file(to_integer(unsigned(write_reg))) <= write_data;
 	end if;
-	if write_reg = read_reg1 then 
+	if write_reg = read_reg1 and write_reg /= "00000" then 
 		read_data1 <= write_data;
-	elsif write_reg = read_reg2 then 
+	elsif write_reg = read_reg2 and write_reg /= "00000" then 
 		read_data2 <= write_data;
 	else
 		read_data1 <= reg_file(to_integer(unsigned(read_reg1)));

@@ -18,4 +18,5 @@ MINI_MIPS_inst: entity work.MINI_MIPS port map(
 clk <= not clk after 5ns;
 reset <= '0', '1' after 10ns;
 
+
 end TEST;
